@@ -5,13 +5,9 @@ document.body.appendChild(divContainer);
 const header = document.createElement("header");
 divContainer.appendChild(header);
 
-const span = document.createElement("span");
-header.appendChild(span);
-
-const buttonTheme = document.createElement("button");
-buttonTheme.className = "buttonTheme";
-buttonTheme.innerText = "Dark Theme";
-header.appendChild(buttonTheme);
+const logo = document.createElement("h1");
+logo.innerHTML = "PokemonLike";
+header.appendChild(logo);
 
 const input = document.createElement("input");
 input.type = "text";
@@ -24,6 +20,11 @@ const buttonSearch = document.createElement("button");
 buttonSearch.className = "buttonSearch";
 buttonSearch.innerText = "buscar";
 header.appendChild(buttonSearch);
+
+const buttonTheme = document.createElement("button");
+buttonTheme.className = "buttonTheme";
+buttonTheme.innerText = "Dark Theme";
+header.appendChild(buttonTheme);
 
 const listPokemon = document.createElement("div");
 listPokemon.className = "listPokemon";
@@ -64,7 +65,9 @@ function scrollTop() {
 function generateCardEachPokemon(data) {
   const divCart = document.createElement("div");
   divCart.className = "divCart";
-  divCart.addEventListener("click", () => pokemonDetails(data));
+  divCart.addEventListener("click", () => {
+    pokemonDetails(data);
+  });
   listPokemon.appendChild(divCart);
 
   const divImg = document.createElement("img");
@@ -97,33 +100,22 @@ function generateCardEachPokemon(data) {
   divInfo.appendChild(speedStat);
 }
 
-// buttonSearch.addEventListener("click", () => {
-//   const num = search.value;
-//   const finalUrl = url + num;
-//   let listPokemon = document.querySelector(".listPokemon");
-//   let searchDiv = document.querySelector(".searchDiv");
-//   fetch(finalUrl)
-//     .then((response) => response.json())
-//     .then((data) => {
-//       if (search.value !== "") {
-//         listPokemon.style.display = "none";
-//         searchDiv.style.display = "block";
-//         generateCard(data);
-//       }
-//     });
-// });
-
 function renderPokemonFound(data) {
-  const divFoundPokemon = document.createElement("div");
-  searchDiv.appendChild(divFoundPokemon);
-
-  const pokemon = document.createElement("p");
-  pokemon.innerText = `Pokemon: ${data.name}`;
-  divFoundPokemon.appendChild(pokemon);
-
   fetch(data.url)
     .then((response) => response.json())
     .then((data) => {
+      const divFoundPokemon = document.createElement("div");
+      divFoundPokemon.addEventListener("click", () => {
+        searchDiv.style.display = "none";
+        pokemonProfile.style.display = "block";
+        pokemonDetails(data);
+      });
+      searchDiv.appendChild(divFoundPokemon);
+
+      const pokemon = document.createElement("p");
+      pokemon.innerText = `Pokemon: ${data.name}`;
+      divFoundPokemon.appendChild(pokemon);
+
       const searchImage = document.createElement("img");
       searchImage.className = "imgSearch";
       searchImage.src = data.sprites.other.dream_world.front_default;
