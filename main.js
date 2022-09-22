@@ -6,7 +6,20 @@ const header = document.createElement("header");
 divContainer.appendChild(header);
 
 const logo = document.createElement("h1");
-logo.innerHTML = "PokemonLike";
+logo.innerHTML = "PokemonJoin";
+logo.addEventListener("click", () => {
+  let searchDiv = document.querySelector(".searchDiv");
+  let pokemonProfile = document.querySelector(".pokemonProfile");
+  let listPokemon = document.querySelector(".listPokemon");
+  if (listPokemon.style.display == "block") {
+    searchDiv.style.display = "none";
+    pokemonProfile.style.display = "none";
+  } else {
+    listPokemon.style.display = "block";
+    searchDiv.style.display = "none";
+    pokemonProfile.style.display = "none";
+  }
+});
 header.appendChild(logo);
 
 const input = document.createElement("input");
@@ -152,6 +165,7 @@ function pokemonDetails(data) {
   const profilePokemon = document.querySelector(".pokemonProfile");
   listPokemon.style.display = "none";
   profilePokemon.style.display = "block";
+  pokemonProfile.innerHTML = "";
 
   const divImage = document.createElement("img");
   divImage.src = `${data.sprites.other.dream_world.front_default}`;
