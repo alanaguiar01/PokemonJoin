@@ -90,17 +90,46 @@ function scrollTop() {
 }
 
 function generateCardEachPokemon(data) {
+  const divEvent = document.createElement("div");
+  divEvent.className = "card-content";
+
+  // divEvent.style.backgroundColor = "red";
+  listPokemon.appendChild(divEvent);
+
   const divCart = document.createElement("div");
   divCart.className = "divCart";
-  // document.addEventListener("mousemove", function (e) {
-  //   let xAxis = (window.innerWidth / 2 - e.pageX) / 10;
-  //   let yAxis = (window.innerHeight / 2 - e.pageY) / 5;
-  //   divCart.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
-  // });
   divCart.addEventListener("click", () => {
     pokemonDetails(data);
   });
-  listPokemon.appendChild(divCart);
+  divEvent.addEventListener("mousemove", function (e) {
+    const bounds = divEvent.getBoundingClientRect();
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
+    const leftX = mouseX - bounds.x;
+    const topY = mouseY - bounds.y;
+    const center = {
+      x: leftX - bounds.width / 2,
+      y: topY - bounds.height / 2,
+    };
+    const distance = Math.sqrt(center.x ** 4 + center.y ** 4);
+    divCart.style.transform = `
+    scale3d(1.07, 1.07, 1.07)
+    rotate3d(
+      ${center.y / 100},
+      ${-center.x / 100},
+      0,
+      ${Math.log(distance) * 2}deg
+    )
+  `;
+    // let xAxis = (window.innerWidth / 2 - e.pageX) / 10;
+    // let yAxis = (window.innerHeight / 2 - e.pageY) / 5;
+    // divCart.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+  });
+  divEvent.addEventListener("mouseout", function (e) {
+    divCart.style.transform = `rotateX(0deg) rotateY(0deg)`;
+    divCart.style.transition = "0.5s linear";
+  });
+  divEvent.appendChild(divCart);
 
   const divImg = document.createElement("img");
   divImg.className = "divImg";

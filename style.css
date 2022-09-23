@@ -117,15 +117,29 @@ header {
     border-radius: 30px;
 }
 
-.divCart:hover{
-    
+.divCart::after{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 8px;
+    border-radius: 50%;
+    left: 0;
+    bottom: 0px;
+    box-shadow: 0 30px 20px rgba(0, 0, 0, .3);
 }
-
+.card-content{
+    transform-style: preserve-3d;
+}
 .divImg{
     width: 100%;
     height: 200px;
     object-fit: contain;
     margin-bottom: 15px;
+    transform: translateZ(100px);
+}
+
+.divInfo{
+    transform: translateZ(50px);
 }
 
 .listPokemon{
