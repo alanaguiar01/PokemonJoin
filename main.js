@@ -5,39 +5,53 @@ document.body.appendChild(divContainer);
 const header = document.createElement("header");
 divContainer.appendChild(header);
 
-const logo = document.createElement("h1");
-logo.innerHTML = "PokemonJoin";
+const logo = document.createElement("img");
+logo.src = "./logo.png";
+logo.className = "logo";
 logo.addEventListener("click", () => {
   let searchDiv = document.querySelector(".searchDiv");
   let pokemonProfile = document.querySelector(".pokemonProfile");
   let listPokemon = document.querySelector(".listPokemon");
-  if (listPokemon.style.display == "block") {
+  if (listPokemon.style.display == "grid") {
     searchDiv.style.display = "none";
     pokemonProfile.style.display = "none";
   } else {
-    listPokemon.style.display = "block";
+    listPokemon.style.display = "grid";
     searchDiv.style.display = "none";
     pokemonProfile.style.display = "none";
   }
 });
 header.appendChild(logo);
 
+const divInputData = document.createElement("div");
+divInputData.className = "inputData";
+header.appendChild(divInputData);
+
 const input = document.createElement("input");
 input.type = "text";
-input.className = "form-control";
+// input.className = "input-search";
 input.required = true;
 input.id = "search";
-header.appendChild(input);
+divInputData.appendChild(input);
 
 const buttonSearch = document.createElement("button");
 buttonSearch.className = "buttonSearch";
-buttonSearch.innerText = "buscar";
-header.appendChild(buttonSearch);
+buttonSearch.innerHTML = "Buscar";
+divInputData.appendChild(buttonSearch);
 
-const buttonTheme = document.createElement("button");
-buttonTheme.className = "buttonTheme";
-buttonTheme.innerText = "Dark Theme";
-header.appendChild(buttonTheme);
+const labelTheme = document.createElement("label");
+labelTheme.className = "switch";
+labelTheme.for = "checkbox";
+header.appendChild(labelTheme);
+
+const inputCheckBox = document.createElement("input");
+inputCheckBox.type = "checkbox";
+inputCheckBox.id = "checkbox";
+labelTheme.appendChild(inputCheckBox);
+
+const divSlider = document.createElement("div");
+divSlider.className = "slider round";
+labelTheme.appendChild(divSlider);
 
 const listPokemon = document.createElement("div");
 listPokemon.className = "listPokemon";
@@ -78,6 +92,11 @@ function scrollTop() {
 function generateCardEachPokemon(data) {
   const divCart = document.createElement("div");
   divCart.className = "divCart";
+  // document.addEventListener("mousemove", function (e) {
+  //   let xAxis = (window.innerWidth / 2 - e.pageX) / 10;
+  //   let yAxis = (window.innerHeight / 2 - e.pageY) / 5;
+  //   divCart.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+  // });
   divCart.addEventListener("click", () => {
     pokemonDetails(data);
   });
@@ -154,7 +173,7 @@ buttonSearch.addEventListener("click", () => {
             .forEach(renderPokemonFound);
         }
       } else {
-        listPokemon.style.display = "block";
+        listPokemon.style.display = "grid";
         searchDiv.style.display = "none";
       }
     });
