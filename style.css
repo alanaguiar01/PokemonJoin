@@ -285,3 +285,7 @@ header {
 .imgSearch{
     width: 200px;
 }
+
+.infoPokemonFound{
+    font-family: 'Poppins', sans-serif;
+}

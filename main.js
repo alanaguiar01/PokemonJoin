@@ -6,7 +6,7 @@ const header = document.createElement("header");
 divContainer.appendChild(header);
 
 const logo = document.createElement("img");
-logo.src = "./logo.png";
+logo.src = "./assets/logo.png";
 logo.className = "logo";
 logo.addEventListener("click", () => {
   let searchDiv = document.querySelector(".searchDiv");
@@ -77,7 +77,7 @@ divContainer.appendChild(topButton);
 
 const imgUpButton = document.createElement("img");
 imgUpButton.className = "imgUpButton";
-imgUpButton.src = "up-chevron.png";
+imgUpButton.src = "./assets/up-chevron.png";
 topButton.appendChild(imgUpButton);
 
 const url = "https://pokeapi.co/api/v2/pokemon/";
@@ -104,7 +104,7 @@ function generateCardEachPokemon(data) {
   divCart.className = "divCart";
   divCart.addEventListener("click", () => {
     const pokebollImg = document.createElement("img");
-    pokebollImg.src = "./PokemonOpen-Pokeball-Transparent.png";
+    pokebollImg.src = "./assets/PokemonOpen-Pokeball-Transparent.png";
     pokebollImg.classList.add("pokeball");
     listPokemon.appendChild(pokebollImg);
     setTimeout(() => {
@@ -183,6 +183,7 @@ function renderPokemonFound(data) {
       searchDiv.appendChild(divFoundPokemon);
 
       const pokemon = document.createElement("p");
+      pokemon.className = "infoPokemonFound";
       pokemon.innerText = `Pokemon: ${data.name}`;
       divFoundPokemon.appendChild(pokemon);
 
