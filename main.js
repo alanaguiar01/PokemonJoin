@@ -92,14 +92,19 @@ function scrollTop() {
 function generateCardEachPokemon(data) {
   const divEvent = document.createElement("div");
   divEvent.className = "card-content";
-
-  // divEvent.style.backgroundColor = "red";
   listPokemon.appendChild(divEvent);
 
   const divCart = document.createElement("div");
   divCart.className = "divCart";
   divCart.addEventListener("click", () => {
-    pokemonDetails(data);
+    const pokebollImg = document.createElement("img");
+    pokebollImg.src = "./PokemonOpen-Pokeball-Transparent.png";
+    pokebollImg.classList.add("pokeball");
+    listPokemon.appendChild(pokebollImg);
+    setTimeout(() => {
+      pokebollImg.remove();
+      pokemonDetails(data);
+    }, 2000);
   });
   divEvent.addEventListener("mousemove", function (e) {
     const bounds = divEvent.getBoundingClientRect();
@@ -121,9 +126,6 @@ function generateCardEachPokemon(data) {
       ${Math.log(distance) * 2}deg
     )
   `;
-    // let xAxis = (window.innerWidth / 2 - e.pageX) / 10;
-    // let yAxis = (window.innerHeight / 2 - e.pageY) / 5;
-    // divCart.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
   });
   divEvent.addEventListener("mouseout", function (e) {
     divCart.style.transform = `rotateX(0deg) rotateY(0deg)`;
@@ -145,19 +147,19 @@ function generateCardEachPokemon(data) {
   divInfo.appendChild(namePokedex);
 
   const hpStat = document.createElement("p");
-  hpStat.innerText = `HpStat: ${data.stats[0].base_stat}`;
+  hpStat.innerHTML = `HpStat: <progress max="100" value=${data.stats[0].base_stat}>`;
   divInfo.appendChild(hpStat);
 
   const attackStat = document.createElement("p");
-  attackStat.innerText = `AttackStat: ${data.stats[1].base_stat}`;
+  attackStat.innerHTML = `AttackStat: <progress max="100" value=${data.stats[1].base_stat}>`;
   divInfo.appendChild(attackStat);
 
   const defenseStat = document.createElement("p");
-  defenseStat.innerText = `DefenseStat: ${data.stats[2].base_stat}`;
+  defenseStat.innerHTML = `DefenseStat: <progress max="100" value=${data.stats[2].base_stat}>`;
   divInfo.appendChild(defenseStat);
 
   const speedStat = document.createElement("p");
-  speedStat.innerText = `SpeedStat: ${data.stats[3].base_stat}`;
+  speedStat.innerHTML = `SpeedStat: <progress max="100" value=${data.stats[3].base_stat}>`;
   divInfo.appendChild(speedStat);
 }
 
@@ -212,54 +214,97 @@ function pokemonDetails(data) {
   const listPokemon = document.querySelector(".listPokemon");
   const profilePokemon = document.querySelector(".pokemonProfile");
   listPokemon.style.display = "none";
-  profilePokemon.style.display = "block";
+  profilePokemon.style.display = "flex";
   pokemonProfile.innerHTML = "";
 
-  const divImage = document.createElement("img");
-  divImage.src = `${data.sprites.other.dream_world.front_default}`;
-  pokemonProfile.appendChild(divImage);
+  const divProfile = document.createElement("div");
+  divProfile.className = "divProfilePokemon";
+  profilePokemon.appendChild(divProfile);
+
+  const imageProfilePokemon = document.createElement("img");
+  imageProfilePokemon.className = "imageProfilePokemon";
+  imageProfilePokemon.src = `${data.sprites.other.dream_world.front_default}`;
+  divProfile.appendChild(imageProfilePokemon);
 
   const divInfoDetail = document.createElement("div");
   divInfoDetail.className = "divInfoDetail";
-  pokemonProfile.appendChild(divInfoDetail);
+  divProfile.appendChild(divInfoDetail);
 
   const nameText = document.createElement("p");
-  nameText.innerText = `Name: ${data.name}`;
+  nameText.className = "infoText";
+  nameText.innerHTML = `Name: <p class="titleProfile">${data.name}</p>`;
   divInfoDetail.appendChild(nameText);
 
   const abilityOne = document.createElement("p");
-  abilityOne.innerText = `Ability 1: ${data.abilities[0].ability.name}`;
+  abilityOne.className = "infoText";
+  abilityOne.innerHTML = `Ability 1: <p class="titleProfile">${data.abilities[0].ability.name}</p>`;
   divInfoDetail.appendChild(abilityOne);
 
   const abilityTwo = document.createElement("p");
-  abilityTwo.innerText = `Ability 2: ${data.abilities[1].ability.name}`;
+  abilityTwo.className = "infoText";
+  abilityTwo.innerHTML = `Ability 2: <p class="titleProfile">${data.abilities[1].ability.name}</p>`;
   divInfoDetail.appendChild(abilityTwo);
 
   const weight = document.createElement("p");
-  weight.innerText = `Weight: ${data.weight}`;
+  weight.className = "infoText";
+  weight.innerHTML = `Weight: <p class="titleProfile">${data.weight}</p>`;
   divInfoDetail.appendChild(weight);
 
   const statHp = document.createElement("p");
-  statHp.innerText = `Status HP: ${data.stats[0].base_stat}`;
+  statHp.className = "infoText";
+  statHp.innerHTML = `Status HP: <p class="titleProfile">${data.stats[0].base_stat}</p>`;
   divInfoDetail.appendChild(statHp);
 
   const statAttack = document.createElement("p");
-  statAttack.innerText = `Status Attack: ${data.stats[1].base_stat}`;
+  statAttack.className = "infoText";
+  statAttack.innerHTML = `Status Attack: <p class="titleProfile">${data.stats[1].base_stat}</p>`;
   divInfoDetail.appendChild(statAttack);
 
   const statDef = document.createElement("p");
-  statDef.innerText = `Status Defense: ${data.stats[2].base_stat}`;
+  statDef.className = "infoText";
+  statDef.innerHTML = `Status Defense: <p class="titleProfile">${data.stats[2].base_stat}</p>`;
   divInfoDetail.appendChild(statDef);
 
   const statSpecialDefense = document.createElement("p");
-  statSpecialDefense.innerText = `Status Attack Special: ${data.stats[3].base_stat}`;
+  statSpecialDefense.className = "infoText";
+  statSpecialDefense.innerHTML = `Status Attack Special: <p class="titleProfile">${data.stats[3].base_stat}</p>`;
   divInfoDetail.appendChild(statSpecialDefense);
 
   const statSpecialAttack = document.createElement("p");
-  statSpecialAttack.innerText = `Status Defense Special: ${data.stats[4].base_stat}`;
+  statSpecialAttack.className = "infoText";
+  statSpecialAttack.innerHTML = `Status Defense Special: <p class="titleProfile">${data.stats[4].base_stat}</p>`;
   divInfoDetail.appendChild(statSpecialAttack);
 
   const statSpeed = document.createElement("p");
-  statSpeed.innerText = `Status Speed: ${data.stats[5].base_stat}`;
+  statSpeed.className = "infoText";
+  statSpeed.innerHTML = `Status Speed: <p class="titleProfile">${data.stats[5].base_stat}</p>`;
   divInfoDetail.appendChild(statSpeed);
 }
+
+// function pokeboll() {
+//   const canvas = document.createElement("canvas");
+//   const profilePokemon = document.querySelector(".pokemonProfile");
+
+//   canvas.className = "view";
+//   canvas.width = 800;
+//   canvas.height = 600;
+//   pokemonProfile.appendChild(canvas);
+
+//   const ctx = canvas.getContext("2d");
+//   let counter = 0;
+//   function onDraw() {
+//     ctx.clearRect(0, 0, canvas.width, canvas.height);
+//     ctx.beginPath();
+//     ctx.rect(0, 0, canvas.width, canvas.height);
+//     ctx.fillStyle = "red";
+//     ctx.fill();
+//     ctx.beginPath();
+//     ctx.arc(50, 50, 100, 0, 2 * Math.PI);
+//     ctx.fillStyle = "blue";
+//     ctx.fill();
+//     console.log("onDraw", counter);
+//     if (counter < 100) window.requestAnimationFrame(onDraw);
+//     counter++;
+//   }
+//   onDraw();
+// }

@@ -101,8 +101,12 @@ header {
     border-radius: 50%;
 }
 
+.card-content{
+    gap: 20px;
+}
 .divCart{
     display: flex;
+    background-image: linear-gradient(#E7E247, #00B4D8);
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -110,9 +114,9 @@ header {
     background-position: top center;
     transform-style: preserve-3d;
     width: 250px;
-    height: 350px;
+    height: 400px;
     padding: 20px;
-    margin-top: 20px;
+    margin: 30px 0;
     border: 1px solid black;
     border-radius: 30px;
 }
@@ -127,6 +131,30 @@ header {
     bottom: 0px;
     box-shadow: 0 30px 20px rgba(0, 0, 0, .3);
 }
+@keyframes fadeIn {
+    0% { 
+        width: 0%;
+        opacity: 0;
+        transform: rotateY(0deg) translate3d(-50%, -50%, 0); 
+        transform-origin: left;
+    }
+    100% { 
+        opacity: 1; 
+        width: 100%;
+        transform: rotateY(360deg) translate3d(-50%, -50%, 0); 
+        transform-origin: left;
+    }
+}
+.pokeball{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    margin: auto;
+    animation: fadeIn 3s;
+}
+
 .card-content{
     transform-style: preserve-3d;
 }
@@ -147,5 +175,51 @@ header {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(auto, 1fr);
     justify-items: center;
-    margin-top: 15px;
+    gap: 10px 0;
 }
+
+.topButton{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    margin: 20px
+}
+
+.pokemonProfile{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.divProfilePokemon{
+    width: 400px;
+    border: 1px solid black;
+    padding: 15px;
+    border-radius: 10px;
+    background-image: linear-gradient(#E7E247, #00B4D8);
+    margin-top: 40px;
+}
+.divProfilePokemon:hover{
+    box-shadow: 10px 5px 5px black;
+}
+
+.imageProfilePokemon{
+    width: 100%;
+    object-fit: contain;
+}
+.divInfoDetail{
+    display: flex;
+    flex-direction: column;
+}
+.divInfoDetail .infoText{
+    display: flex;
+    font-size: 20px;
+    font-weight: bold;
+}
+.divInfoDetail .titleProfile{
+    margin-left: 10px;
+}
+
