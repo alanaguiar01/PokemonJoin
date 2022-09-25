@@ -47,6 +47,9 @@ header.appendChild(labelTheme);
 const inputCheckBox = document.createElement("input");
 inputCheckBox.type = "checkbox";
 inputCheckBox.id = "checkbox";
+inputCheckBox.addEventListener("change", () => {
+  document.querySelector("html").classList.toggle("dark-mode");
+});
 labelTheme.appendChild(inputCheckBox);
 
 const divSlider = document.createElement("div");
@@ -65,14 +68,17 @@ divContainer.appendChild(pokemonProfile);
 const searchDiv = document.createElement("div");
 searchDiv.className = "searchDiv";
 searchDiv.style.display = "none";
-searchDiv.style.backgroundColor = "grey";
 divContainer.appendChild(searchDiv);
 
 const topButton = document.createElement("button");
 topButton.className = "topButton";
-topButton.innerText = "Top";
 topButton.onclick = scrollTop;
 divContainer.appendChild(topButton);
+
+const imgUpButton = document.createElement("img");
+imgUpButton.className = "imgUpButton";
+imgUpButton.src = "up-chevron.png";
+topButton.appendChild(imgUpButton);
 
 const url = "https://pokeapi.co/api/v2/pokemon/";
 fetch(url)
@@ -173,6 +179,7 @@ function renderPokemonFound(data) {
         pokemonProfile.style.display = "block";
         pokemonDetails(data);
       });
+      divFoundPokemon.className = "pokemon-found";
       searchDiv.appendChild(divFoundPokemon);
 
       const pokemon = document.createElement("p");
@@ -193,8 +200,9 @@ buttonSearch.addEventListener("click", () => {
     .then((response) => response.json())
     .then((data) => {
       if (search.value !== "") {
+        pokemonProfile.style.display = "none";
         listPokemon.style.display = "none";
-        searchDiv.style.display = "block";
+        searchDiv.style.display = "flex";
         searchDiv.innerHTML = "";
         if (data) {
           data.results

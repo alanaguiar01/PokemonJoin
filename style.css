@@ -3,12 +3,37 @@
     padding: 0;
     box-sizing: border-box;
 }
+:root{
+    --body-bg: #fafafa;
+    --body-color: #555;
+    --list-color: #222;
+    --header-color: #5fc3fd;
+    --switch-color: #ccc;
+    --card-bg-1: #E7E247;
+    --card-bg-2: #00B4D8;
+    --border-color: #000000;
+}
+.dark-mode:root{
+    --body-bg: #212529;
+    --body-color: #FCFCFC;
+    --list-color: #DDF0FF;
+    --header-color: #000001;
+    --switch-color: #F4E04D;
+    --card-bg-1: #E7E247;
+    --card-bg-2: #00B4D8;
+    --border-color: #FAFAFA;
+
+}
+
+body, .searchDiv, .listPokemon, .pokemonProfile{
+    background-color: var(--body-bg);
+}
 
 header {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: rgb(95, 195, 253);
+    background-color: var(--header-color);
     height: 80px;
 }
 
@@ -60,14 +85,14 @@ header {
     cursor: pointer;
     width: 50px;
     height: 30px;
-    background-color: #ccc;
+    background-color: var(--body-bg);
     -webkit-transition: .4s;
     transition: .4s;
 }
 
 .slider:before {
     background-color: #fff;
-    bottom: 2px;
+    bottom: 1px;
     content: "";
     height: 26px;
     width: 26px;
@@ -82,7 +107,7 @@ header {
     -moz-appearance: none;
 }
 #checkbox:checked + .slider {
-    background-color: #dbdb0a;
+    background-color: var(--switch-color);
 }
 
 #checkbox:focus + .slider {
@@ -99,6 +124,7 @@ header {
 
 .slider.round:before {
     border-radius: 50%;
+    border: 1px solid black;
 }
 
 .card-content{
@@ -106,7 +132,7 @@ header {
 }
 .divCart{
     display: flex;
-    background-image: linear-gradient(#E7E247, #00B4D8);
+    background-image: linear-gradient(var(--card-bg-1), var(--card-bg-2));
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -114,7 +140,7 @@ header {
     background-position: top center;
     transform-style: preserve-3d;
     width: 250px;
-    height: 400px;
+    height: 430px;
     padding: 20px;
     margin: 30px 0;
     border: 1px solid black;
@@ -168,6 +194,7 @@ header {
 
 .divInfo{
     transform: translateZ(50px);
+    font-family: 'Open Sans', sans-serif;
 }
 
 .listPokemon{
@@ -185,7 +212,14 @@ header {
     position: fixed;
     right: 0;
     bottom: 0;
-    margin: 20px
+    margin: 20px;
+    padding: 10px;
+    background-color: #F4FFFD;
+}
+
+.imgUpButton{
+    width: 100%;
+    object-fit: contain;
 }
 
 .pokemonProfile{
@@ -199,27 +233,55 @@ header {
     border: 1px solid black;
     padding: 15px;
     border-radius: 10px;
-    background-image: linear-gradient(#E7E247, #00B4D8);
-    margin-top: 40px;
+    background-image: linear-gradient(var(--card-bg-1), var(--card-bg-2));
+    margin: 40px 0;
 }
 .divProfilePokemon:hover{
-    box-shadow: 10px 5px 5px black;
+    box-shadow: 10px 5px 5px var(--border-color);
 }
 
 .imageProfilePokemon{
     width: 100%;
+    height: 400px;
     object-fit: contain;
 }
 .divInfoDetail{
     display: flex;
     flex-direction: column;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 15px;
 }
 .divInfoDetail .infoText{
     display: flex;
     font-size: 20px;
     font-weight: bold;
+    margin-bottom: 10px;
+    font-family: 'Open Sans', sans-serif;
+
 }
 .divInfoDetail .titleProfile{
     margin-left: 10px;
+    font-weight: 400;
+    font-family: 'Poppins', sans-serif;
 }
 
+.searchDiv{
+    margin: 15px 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    color: var(--body-color);
+}
+
+.pokemon-found{
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    padding: 15px;
+}
+.imgSearch{
+    width: 200px;
+}
